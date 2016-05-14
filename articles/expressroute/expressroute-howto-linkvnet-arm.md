@@ -127,8 +127,11 @@ The circuit user needs the peer ID and an authorization key from the circuit own
 
 The circuit user can run the following cmdlet to redeem a link authorization:
 
-	$id = "/subscriptions/********************************/resourceGroups/ERCrossSubTestRG/providers/Microsoft.Network/expressRouteCircuits/MyCircuit"	
-	$connection = New-AzureRmVirtualNetworkGatewayConnection -Name "ERConnection" -ResourceGroupName "RemoteResourceGroup" -Location "East US" -VirtualNetworkGateway1 $gw -PeerId $id -ConnectionType ExpressRoute -AuthorizationKey "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+	$circuitID = "/subscriptions/********************************/resourceGroups/ERCrossSubTestRG/providers/Microsoft.Network/expressRouteCircuits/MyCircuit"
+	#The ID of a gateway already created in the subscription
+	$gw = Get-AzureRmVirtualNetworkGateway -Name "ERGateway" -ResourceGroupName "ExpressRouteResourceGroup"
+
+	$connection = New-AzureRmVirtualNetworkGatewayConnection -Name "ERConnection" -ResourceGroupName "ExpressRouteResourceGroup" -Location "East US" -VirtualNetworkGateway1 $gw -PeerId $circuitID -ConnectionType ExpressRoute -AuthorizationKey "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 
 #### Releasing connection authorizations
 
